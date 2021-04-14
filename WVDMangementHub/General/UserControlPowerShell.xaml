@@ -26,7 +26,7 @@
                 <TextBlock x:Name="txtBlock1" TextWrapping="Wrap" Foreground="Black" Background="White" ScrollViewer.CanContentScroll="True" ScrollViewer.HorizontalScrollBarVisibility="Visible" ScrollViewer.VerticalScrollBarVisibility="Visible"/>
             </ScrollViewer>
         </Grid>
-        <Button Content="Log In" HorizontalAlignment="Left" Margin="715,0,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click"/>
+        <Button Content="Log In" HorizontalAlignment="Left" Margin="680,10,0,0" VerticalAlignment="Top" Width="70" Click="Button_Click"  Grid.Row="0" RenderTransformOrigin="-0.306,0.802"/>
 
     </Grid>
 

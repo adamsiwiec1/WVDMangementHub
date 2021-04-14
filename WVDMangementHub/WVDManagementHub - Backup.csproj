@@ -8,11 +8,6 @@
 
   <ItemGroup>
     <None Remove="Assets\cyberlogo.png" />
-    <None Remove="Scripts\NRTwvd_Adam.ps1" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <EditorConfigFiles Include="Scripts\NRTwvd_Adam.ps1" />
   </ItemGroup>
 
   <ItemGroup>
@@ -22,6 +17,11 @@
     <PackageReference Include="Microsoft.PowerShell.SDK" Version="7.1.3" />
     <PackageReference Include="System.Management.Automation" Version="7.1.3" />
   </ItemGroup>
+
+	<ItemGroup>
+	  <Compile Include="..\Scripts\NRTwvd_Adam.ps1" Link="MySharedClass.cs" />
+	</ItemGroup>
+
 
   <ItemGroup>
     <Resource Include="Assets\cyberlogo.png">

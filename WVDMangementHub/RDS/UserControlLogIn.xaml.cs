@@ -32,5 +32,10 @@ namespace WVDManagementHub.RDS
         {
             sc.VanPoolRDSLogin();
         }
+
+        private void Button_Click_2(object sender, RoutedEventArgs e)
+        {
+            sc.NRTRDS_Script();
+        }
     }
 }

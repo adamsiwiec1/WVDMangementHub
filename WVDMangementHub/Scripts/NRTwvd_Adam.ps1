@@ -57,10 +57,10 @@ function prompt-user {
 
 ######################### Prompt User ####################################
 function Main {
-#login-rds
+login-rds
 $rdsTenant, $rdsHostPool = tenant-pool-menu
 Get-RdsUserSession -TenantName $rdsTenant -HostPoolName $rdsHostPool
 prompt-user
 }
 Main
-
+pause

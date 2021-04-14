@@ -15,7 +15,8 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
-        <Button Content="Log in Vanpool RDS" HorizontalAlignment="Left" Margin="66,67,0,0" VerticalAlignment="Top" Click="Button_Click_1" IsDefault="True" Height="42" Width="197"/>
+        <Button Content="Log in Vanpool RDS #1" HorizontalAlignment="Left" Margin="66,67,0,0" VerticalAlignment="Top" Click="Button_Click_1" IsDefault="True" Height="42" Width="197"/>
+        <Button Content="Log in Vanpool RDS #2" HorizontalAlignment="Left" Margin="411,67,0,0" VerticalAlignment="Top" Click="Button_Click_2" IsDefault="True" Height="42" Width="197"/>
 
 
     </Grid>
