@@ -21,10 +21,11 @@ namespace WVDManagementHub
     /// </summary>
     public partial class UserControlMenu : UserControl
     {
-        public UserControlMenu(ItemMenu itemMenu)
+        MainWindow _context;
+        public UserControlMenu(ItemMenu itemMenu, MainWindow context)
         {
             InitializeComponent();
-
+            _context = context;
 
             // This it the dropdown
 
@@ -33,8 +34,11 @@ namespace WVDManagementHub
 
             this.DataContext = itemMenu;
 
+        }
 
-
+        private void ListViewMenu_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            _context.SwitchScreen(((SubItem)((ListView)sender).SelectedItem).Screen);
         }
     }
 }
