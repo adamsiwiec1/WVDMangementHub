@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Management.Automation;
 using System.Management.Automation.Runspaces;
@@ -18,6 +19,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using WVDManagementHub.Drives;
 using WVDManagementHub.General;
+using WVDManagementHub.RDS;
 using WVDManagementHub.Users;
 using WVDManagementHub.ViewModel;
 
@@ -28,15 +30,15 @@ namespace WVDManagementHub
     /// </summary>
     public partial class MainWindow : Window
     {
-        private Runspace rs;
+
         public MainWindow()
         {
             InitializeComponent();
-            InvokeLogin();
 
                 // Explains the program and shows basic stats
                 var menuGeneral = new List<SubItem>();
             menuGeneral.Add(new SubItem("Run PowerShell Commands", new UserControlPowerShell()));
+            menuGeneral.Add(new SubItem("Log into RDS", new UserControlLogIn()));
             //menuGeneral.Add(new SubItem("File Explorer", new UserControlPowerShell()));
             //menuGeneral.Add(new SubItem("Networking", new UserControlPowerShell()));
             var item0 = new ItemMenu("General", menuGeneral, PackIconKind.User); //, PackIconKind.ViewDashboard);
@@ -78,53 +80,6 @@ namespace WVDManagementHub
 
 
         }
-
-        public void InvokeLogin()
-        {
-            rs = RunspaceFactory.CreateRunspace();
-            rs.Open();
-            using (PowerShell PowerShellInst = PowerShell.Create())
-            {
-                string criteria = "system*";
-                PowerShellInst.AddScript("Add-RdsAccount -DeploymentUrl 'https://rdbroker.wvd.microsoft.com'" + criteria);
-                Collection<PSObject> PSOutput = PowerShellInst.Invoke();
-                foreach (PSObject obj in PSOutput)
-                {
-                    if (obj != null)
-                    {
-                        Console.Write(obj.Properties["Status"].Value.ToString() + " - ");
-                        Console.WriteLine(obj.Properties["DisplayName"].Value.ToString());
-                    }
-                }
-                Console.WriteLine("Done");
-                Console.Read();
-            }
-        }
-
-        public void InvokeLogin2()
-        {
-            //execute powershell cmdlets or scripts using command arguments as process
-            ProcessStartInfo processInfo = new ProcessStartInfo();
-            processInfo.FileName = @"powershell.exe";
-            //execute powershell script using script file
-            //processInfo.Arguments = @"& {c:\temp\Get-EventLog.ps1}";
-            //execute powershell command
-            processInfo.Arguments = @"& {Get-EventLog -LogName Application -Newest 10 -EntryType Information | Select EntryType, Message}";
-            processInfo.RedirectStandardError = true;
-            processInfo.RedirectStandardOutput = true;
-            processInfo.UseShellExecute = false;
-            processInfo.CreateNoWindow = true;
-
-            //start powershell process using process start info
-            Process process = new Process();
-            process.StartInfo = processInfo;
-            process.Start();
-
-            Console.WriteLine("Output - {0}", process.StandardOutput.ReadToEnd());
-            Console.WriteLine("Errors - {0}", process.StandardError.ReadToEnd());
-            Console.Read();
-        }
-
 
 
     }

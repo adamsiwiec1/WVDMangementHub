@@ -15,6 +15,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using WVDManagementHub.Methods;
 
 namespace WVDManagementHub.General
 {
@@ -23,6 +24,7 @@ namespace WVDManagementHub.General
     /// </summary>
     public partial class UserControlPowerShell : UserControl
     {
+        Login lg = new Login();
 
         public UserControlPowerShell()
         {
@@ -39,12 +41,14 @@ namespace WVDManagementHub.General
             PowerShell ps = PowerShell.Create();
             ps.Runspace = rs;
 
-            ps.AddScript("Add-RdsAccount -DeploymentUrl 'https://rdbroker.wvd.microsoft.com'");
+            ps.AddScript(script);
             return ps.Invoke();
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
+
+
             Collection<PSObject> results = RunScript(txtBox1.Text);
             StringBuilder stringBuilder = new StringBuilder();
             foreach (PSObject obj in results)
@@ -53,6 +57,13 @@ namespace WVDManagementHub.General
             }
 
             txtBlock1.Text = stringBuilder.ToString();
+
+            lg.RDSLogin();
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            lg.RDSLogin();
         }
     }
 }
